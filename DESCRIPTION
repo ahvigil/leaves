@@ -1,0 +1,13 @@
+Package: leaves
+Title: Tools for looking at Random Forests and other tree based modeling approaches
+Version: 0.0.1.20150702
+Date: 2015-07-23
+Authors@R: person("Arthur", "Vigil", , "ahvigil@mail.sfsu.edu", role = c("aut", "cre"))
+Author: Arthur Vigil [aut, cre],
+Maintainer: Arthur Vigil <ahvigil@mail.sfsu.edu>
+Description: This package is an application of the randomForest package to the FEATURE system for protein functional annotation developed by the Helix Group at Stanford University (http://feature.stanford.edu)
+NeedsCompilation: yes
+Depends: R (>= 3.1.3)
+Imports: randomForest, stringr, foreign, matrixStats, ggplot2, argparser, grid
+License: GPL (>= 2)
+Suggests: testthat
