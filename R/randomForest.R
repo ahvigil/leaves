@@ -1,7 +1,7 @@
 #' @export
 trace.forest <-
 function (object, newdata, response=NULL, type = "response", norm.votes = TRUE,
-predict.all=FALSE, proximity = FALSE, nodes=FALSE, cutoff, ...)
+predict.all=TRUE, proximity = FALSE, nodes=FALSE, cutoff, ...)
 {
     if (!inherits(object, "randomForest"))
     stop("object not of class randomForest")

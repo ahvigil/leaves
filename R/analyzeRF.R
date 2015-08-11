@@ -35,7 +35,7 @@ analyzeRF <- function(model, df, seed=5, verbose=FALSE,
     save_file <- file.path(output_path, "binary", sprintf("%s.save", rf_params))
     if(file.access(save_file)==-1){
         if(verbose) cat("No saved trace at", save_file, "\n")
-        prediction <- trace.forest(model, df, response=df$class, predict.all=TRUE)
+        prediction <- trace.forest(model, df, response=df$class)
 
         if(verbose) cat(sprintf("prediction is %d by %d\n", nrow(prediction$individual), ncol(prediction$individual)))
 
