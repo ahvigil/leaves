@@ -1,4 +1,4 @@
-context("AnalyzeRF tests")
+context("leaves tests")
 
 ## BEGIN TESTS
 test_that("Tests run from scratch produce correct results", {
@@ -13,7 +13,7 @@ test_that("Tests run from scratch produce correct results", {
     rf_data_path <- file.path(getwd())
     feature_data_path <- file.path(getwd())
 
-    invisible(analyzeRF::analyzeModel(test.model, nForests, rf_data_path=file.path(getwd()),
+    invisible(leaves::analyzeModel(test.model, nForests, rf_data_path=file.path(getwd()),
                             feature_data_path=file.path(getwd()),
                             output_path = output_path) )
 

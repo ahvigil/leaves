@@ -5,7 +5,7 @@ test_that("RF traces are reproducible", {
 	for(n in c(0, 1)){
 		arff.data <- foreign::read.arff("ASP_PROTEASE.4.ASP.OD1_test.arff.gz")
         load(file.path(file.path(getwd()), sprintf("baseline_0%d.model", n)))
-		prediction <- analyzeRF::trace.forest(model, arff.data, response=arff.data$class, predict.all=TRUE)
+		prediction <- leaves::trace.forest(model, arff.data, response=arff.data$class, predict.all=TRUE)
 		mdim <- ncol(arff.data)-1 # don't include classification value
         ntest <- nrow(arff.data)
         
@@ -39,7 +39,7 @@ test_that("RF traces are reproducible", {
             TP_tree <- which(prediction$individual[i,]==1)
 
             for(k in TP_tree){
-                r_result <- analyzeRF::traceTreeR(trees[[k]], feature,
+                r_result <- leaves::traceTreeR(trees[[k]], feature,
                                       rep(0,nrow(trees[[k]])), 0, 0, r_frequency,
                                       r_abundant, r_deficient)
                 r_frequency <- r_result[["frequency"]]
@@ -47,7 +47,7 @@ test_that("RF traces are reproducible", {
                 r_abundant <- r_result[["abundance"]]
 
                 # Same thing but in C
-                c_result <- analyzeRF::traceTreeC(trees[[k]], feature, trees[[k]][,3], trees[[k]][,4],
+                c_result <- leaves::traceTreeC(trees[[k]], feature, trees[[k]][,3], trees[[k]][,4],
                                       rep(0,nrow(trees[[k]])), 0, 0, c_frequency,
                                       c_abundant, c_deficient)
 

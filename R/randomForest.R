@@ -160,7 +160,7 @@ predict.all=FALSE, proximity = FALSE, nodes=FALSE, cutoff, ...)
         abundant = as.integer(abundant),
         deficient = as.integer(deficient),
         DUP=FALSE,
-        PACKAGE = "analyzeRF")
+        PACKAGE = "leaves")
 
     out.class <- factor(rep(NA, length(rn)),
     levels=1:length(object$classes),
@@ -212,7 +212,7 @@ frequency, abundancy, deficiency){
     frequency = as.integer(frequency),
     abundance = as.integer(abundancy),
     deficiency = as.integer(deficiency),
-    DUP=FALSE, PACKAGE="analyzeRF")
+    DUP=FALSE, PACKAGE="leaves")
 }
 
 # R code to trace through tree, counting frequency of variables for positive cases

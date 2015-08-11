@@ -6,4 +6,4 @@ ntree      <- 501
 seed_mult <- 43
 nForests <- 2
 
-test_check("analyzeRF")
+test_check("leaves")
