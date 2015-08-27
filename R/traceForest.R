@@ -196,7 +196,7 @@ predict.all=TRUE, proximity = FALSE, nodes=FALSE, cutoff, ...)
     res
 }
 
-#' @useDynLib analyzeRF _traceTree
+#' @useDynLib leaves _traceTree
 #' @export
 # C code to trace through tree, counting frequency of variables for positive cases
 traceTreeC <- function(tree, x, bestvar, bestsplit, noderep, endnode, prediction,

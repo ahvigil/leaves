@@ -52,12 +52,3 @@ test_that("Tests run from scratch produce correct results", {
              file.path(getwd(), "ASP_PROTEASE.4.ASP.OD1_test_n0501_m50_0043.model")),
            recursive=TRUE)
 })
-
-test_that("Models run in parallel produce identical results", { 
-	cl <- parallel::makeForkCluster(2)
-	
-	set.seed(314)
-	
-	results <- parallel::clusterCall(cl, randomForest::randomForest, iris)
-	expect_equal(results[1], results[2])
-})
