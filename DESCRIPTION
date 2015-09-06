@@ -1,6 +1,6 @@
 Package: leaves
 Title: Tools for looking at Random Forests and other tree based modeling approaches
-Version: 0.0.1.20150702
+Version: 0.0.2.20150906
 Date: 2015-07-23
 Authors@R: person("Arthur", "Vigil", , "ahvigil@mail.sfsu.edu", role = c("aut", "cre"))
 Author: Arthur Vigil [aut, cre],
