@@ -201,8 +201,9 @@ function (object, newdata, response=NULL, type = "response", norm.votes = TRUE, 
     res
 }
 
+#' C code to trace through tree, counting frequency of variables for positive cases
+#' @export
 #' @useDynLib leaves _traceTree
-# C code to trace through tree, counting frequency of variables for positive cases
 traceTreeC <- function(tree, x, bestvar, bestsplit, noderep, endnode, prediction,
 frequency, abundancy, deficiency){
     .C("_traceTree",
@@ -220,6 +221,7 @@ frequency, abundancy, deficiency){
 }
 
 # R code to trace through tree, counting frequency of variables for positive cases
+#' @export
 traceTreeR <- function(tree, x, noderep, endnode, prediction,
 frequency, abundancy, deficiency){
     # count frequency during tree traversal
