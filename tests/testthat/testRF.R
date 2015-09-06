@@ -1,4 +1,4 @@
-context("RF tests")
+context("leaves::rf tests")
 
 ## BEGIN TESTS
 test_that("RF produces results identical to randomForest module", {

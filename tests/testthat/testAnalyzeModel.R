@@ -1,7 +1,7 @@
-context("leaves tests")
+context("leaves::analyzeModel tests")
 
 ## BEGIN TESTS
-test_that("Tests run from scratch produce correct results", {
+test_that("Model analysis produces expected results", {
     test.model <- {}
     test.model$name <- "ASP_PROTEASE.4.ASP.OD1_test"
     test.model$ntree      <- 501

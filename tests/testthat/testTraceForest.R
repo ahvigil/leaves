@@ -1,4 +1,4 @@
-context("traceRF tests")
+context("leaves::trace.forest tests")
 
 ## BEGIN TESTS
 test_that("RF traces are reproducible", {
