@@ -1,6 +1,7 @@
 ## mylevels() returns levels if given a factor, otherwise 0.
 mylevels <- function(x) if (is.factor(x)) levels(x) else 0
 
+#' Default randomForest implementation modified from randomForest package
 #' @export
 "rf.default" <-
     function(x, y=NULL,  xtest=NULL, ytest=NULL, ntree=500,

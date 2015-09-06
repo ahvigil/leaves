@@ -1,8 +1,11 @@
+#' Predict data using randomForest object, tracing variable usage along the way
+#' This is essentially randomForest::predict with some modifications for
+#' monitoring variable frequency, abundance, and deficiency
 #' @export
 trace.forest <-
-function (object, newdata, response=NULL, type = "response", norm.votes = TRUE,
-predict.all=TRUE, proximity = FALSE, nodes=FALSE, cutoff, ...)
+function (object, newdata, response=NULL, type = "response", norm.votes = TRUE, proximity = FALSE, nodes=FALSE, cutoff, ...)
 {
+    predict.all<-TRUE
     if (!inherits(object, "randomForest"))
     stop("object not of class randomForest")
     if (is.null(object$forest)) stop("No forest component in the object")
@@ -129,6 +132,7 @@ predict.all=TRUE, proximity = FALSE, nodes=FALSE, cutoff, ...)
     frequency = integer(mdim*nclass)
 
     countts <- matrix(0, ntest, nclass)
+    # use my own C prediction routine to get frequency information
     t1 <- .C("_predict",
         mdim = as.integer(mdim),
         ntest = as.integer(ntest),
@@ -178,6 +182,7 @@ predict.all=TRUE, proximity = FALSE, nodes=FALSE, cutoff, ...)
     if (predict.all) {
         treepred <- matrix(object$classes[t1$treepred],
         nrow=length(keep), dimnames=list(rn[keep], NULL))
+        # this is where the magic happens
         res <- list(aggregate=res, individual=treepred,
                     frequency=f,
                     abundant=a,
@@ -197,7 +202,6 @@ predict.all=TRUE, proximity = FALSE, nodes=FALSE, cutoff, ...)
 }
 
 #' @useDynLib leaves _traceTree
-#' @export
 # C code to trace through tree, counting frequency of variables for positive cases
 traceTreeC <- function(tree, x, bestvar, bestsplit, noderep, endnode, prediction,
 frequency, abundancy, deficiency){
@@ -216,7 +220,6 @@ frequency, abundancy, deficiency){
 }
 
 # R code to trace through tree, counting frequency of variables for positive cases
-#' @export
 traceTreeR <- function(tree, x, noderep, endnode, prediction,
 frequency, abundancy, deficiency){
     # count frequency during tree traversal
