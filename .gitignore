@@ -16,3 +16,6 @@ vignettes/*.pdf
 # compiled file
 *.so
 *.o
+
+# documentation
+man/
