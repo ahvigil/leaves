@@ -13,6 +13,9 @@ vignettes/*.html
 vignettes/*.pdf
 .Rproj.user
 
-# compiled file
+# compiled files
 *.so
 *.o
+man/
+symbols.rds
+
