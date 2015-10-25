@@ -2,7 +2,6 @@
 
 S3method(rf,default)
 S3method(rf,formula)
-export(analyzeModel)
 export(rf)
 export(trace.forest)
 export(traceTreeC)
