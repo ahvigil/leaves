@@ -8,6 +8,6 @@ Maintainer: Arthur Vigil <ahvigil@mail.sfsu.edu>
 Description: This package is an application of the randomForest package to the FEATURE system for protein functional annotation developed by the Helix Group at Stanford University (http://feature.stanford.edu)
 NeedsCompilation: yes
 Depends: R (>= 2.14.0)
-Imports: randomForest, stringr, foreign, ggplot2, argparser, grid
+Imports: randomForest, stringr, foreign, ggplot2, grid
 License: GPL (>= 2)
 Suggests: testthat
