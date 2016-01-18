@@ -172,6 +172,8 @@ function (object, newdata, response=NULL, type = "response", norm.votes = TRUE, 
     out.class[keep] <- object$classes[t1$jet]
     names(out.class)[keep] <- rn[keep]
     res <- out.class
+    
+    # create matrix of counts using class names as columns
     f <- matrix(t1$frequency, nrow=mdim)
     a <- matrix(t1$abundant, nrow=mdim)
     d <- matrix(t1$deficient, nrow=mdim)
@@ -179,15 +181,13 @@ function (object, newdata, response=NULL, type = "response", norm.votes = TRUE, 
     dimnames(a) <- list(NULL, object$classes)
     dimnames(d) <- list(NULL, object$classes)
 
-    if (predict.all) {
-        treepred <- matrix(object$classes[t1$treepred],
-        nrow=length(keep), dimnames=list(rn[keep], NULL))
-        # this is where the magic happens
-        res <- list(aggregate=res, individual=treepred,
-                    frequency=f,
-                    abundant=a,
-                    deficient=d)
-    }
+    treepred <- matrix(object$classes[t1$treepred],
+    nrow=length(keep), dimnames=list(rn[keep], NULL))
+    # this is where the magic happens
+    res <- list(aggregate=res, individual=treepred,
+                frequency=f,
+                abundant=a,
+                deficient=d)
     if (proximity)
     res <- list(predicted = res, proximity = structure(t1$proxmatrix,
     dim = c(ntest, ntest),

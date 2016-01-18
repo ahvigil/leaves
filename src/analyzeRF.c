@@ -129,6 +129,7 @@ void _predict(int *mdim, int *ntest, int *nclass, int *maxcat,
         for(i = 0; i<*ntest;i++){
             // decision of jth tree on ith observation (using base 0 indexing)
             decision = jts[*ntest*j + i] - 1;
+            //Rprintf("Tree %d says #%d is class %d (actually %d)\n", j, i, decision, (response[i]-1));
             // tree j incorrectly classifies case i
             if(decision != (response[i]-1)){
                 continue;

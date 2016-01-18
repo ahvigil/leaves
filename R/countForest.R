@@ -2,7 +2,7 @@
 #' @export
 countForest <- function(x, data, y_name="class") {
   classes <- levels(data[,y_name])
-  results <- leaves::trace.forest(x, data)
+  results <- leaves::trace.forest(x, data, response=as.numeric(data[,y_name]))
   
   for(cl in classes){
     x$importance <- cbind(x$importance, results$frequency[,cl])
