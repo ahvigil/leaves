@@ -3,7 +3,7 @@
 #' monitoring variable frequency, abundance, and deficiency
 #' @export
 trace.forest <-
-function (object, newdata, response=NULL, type = "response", norm.votes = TRUE, proximity = FALSE, nodes=FALSE, cutoff, ...)
+function (object, newdata, response=NULL, type = "response", norm.votes = TRUE, nodes=FALSE, cutoff, ...)
 {
     predict.all<-TRUE
     if (!inherits(object, "randomForest"))
@@ -23,24 +23,17 @@ function (object, newdata, response=NULL, type = "response", norm.votes = TRUE, 
             object$predicted
         }
         if (object$type == "regression") return(p)
-        if (proximity & is.null(object$proximity))
-        warning("cannot return proximity without new data if random forest object does not already have proximity")
         if (out.type == 1) {
-            if (proximity) {
-                return(list(pred = p,
-                proximity = object$proximity))
-            } else return(p)
+            return(p)
         }
         v <- object$votes
         if (!is.null(object$na.action)) v <- napredict(object$na.action, v)
         if (norm.votes) {
             t1 <- t(apply(v, 1, function(x) { x/sum(x) }))
             class(t1) <- c(class(t1), "votes")
-            if (proximity) return(list(pred = t1, proximity = object$proximity))
-            else return(t1)
+            return(t1)
         } else {
-            if (proximity) return(list(pred = v, proximity = object$proximity))
-            else return(v)
+            return(v)
         }
     }
     if (missing(cutoff)) {
@@ -123,7 +116,7 @@ function (object, newdata, response=NULL, type = "response", norm.votes = TRUE, 
     } else {
         treepred <- numeric(ntest)
     }
-    proxmatrix <- if (proximity) matrix(0, ntest, ntest) else numeric(1)
+    proxmatrix <- numeric(1)
     nodexts <- if (nodes) integer(ntest * ntree) else integer(ntest)
 
     # frequency of each feature during correct classification of each class
@@ -157,7 +150,7 @@ function (object, newdata, response=NULL, type = "response", norm.votes = TRUE, 
         nodexts = as.integer(nodexts),
         ndbigtree = as.integer(object$forest$ndbigtree),
         predict.all = as.integer(predict.all),
-        prox = as.integer(proximity),
+        prox = as.integer(F),
         proxmatrix = as.double(proxmatrix),
         nodes = as.integer(nodes),
         frequency = as.integer(frequency),
@@ -188,10 +181,6 @@ function (object, newdata, response=NULL, type = "response", norm.votes = TRUE, 
                 frequency=f,
                 abundant=a,
                 deficient=d)
-    if (proximity)
-    res <- list(predicted = res, proximity = structure(t1$proxmatrix,
-    dim = c(ntest, ntest),
-    dimnames = list(rn[keep], rn[keep])))
     if (nodes) attr(res, "nodes") <- matrix(t1$nodexts, ntest, ntree,
     dimnames=list(rn[keep], 1:ntree))
 
